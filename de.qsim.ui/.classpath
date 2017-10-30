@@ -11,5 +11,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/de.qsim.core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/de.qsim.simulator"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

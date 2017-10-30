@@ -4,6 +4,7 @@
 	<artifactId>de.qsim.core</artifactId>
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/javax.vecmath/vecmath -->
 		<dependency>
 			<groupId>javax.vecmath</groupId>
 			<artifactId>vecmath</artifactId>
