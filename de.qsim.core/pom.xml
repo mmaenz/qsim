@@ -4,12 +4,14 @@
 	<artifactId>de.qsim.core</artifactId>
 
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/javax.vecmath/vecmath -->
+
 		<dependency>
-			<groupId>javax.vecmath</groupId>
-			<artifactId>vecmath</artifactId>
-			<version>1.5.2</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>3.6.1</version>
 		</dependency>
+
+
 	</dependencies>
 	<parent>
 		<groupId>de.qsim</groupId>
