@@ -2,7 +2,7 @@ package de.qsim.core.gate;
 
 import de.qsim.core.qubit.QuBit;
 
-public class EmptyGate implements IGate {
+public class IdentityGate implements IGate {
 
 	@Override
 	public String getDescription() {
