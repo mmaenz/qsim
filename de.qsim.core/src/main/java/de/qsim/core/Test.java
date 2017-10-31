@@ -13,7 +13,8 @@ public class Test {
 		});
 	}
 	
-	public Test() {	
+	public Test() {
+		System.out.println("Available gates:");
 	}
 	
 	public static void main(String[] args) {

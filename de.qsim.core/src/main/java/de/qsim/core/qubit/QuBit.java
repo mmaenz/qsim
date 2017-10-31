@@ -28,6 +28,7 @@ public class QuBit implements IQuBit {
 	 * 
 	 * @return qubit
 	 */
+	@Override
 	public Complex[] getQubit() {
 		Complex[] copyOfQubitVector = qubitVector;
 		return copyOfQubitVector;
@@ -90,6 +91,7 @@ public class QuBit implements IQuBit {
 	 * 
 	 * @return true if the state is valid, otherwise false
 	 */
+	@Override
 	public boolean isValid() {
 		double sum = 0.0;
 		for (Complex c : this.qubitVector) {
@@ -98,4 +100,5 @@ public class QuBit implements IQuBit {
 		}
 		return (sum == 1.0);
 	}
+
 }
