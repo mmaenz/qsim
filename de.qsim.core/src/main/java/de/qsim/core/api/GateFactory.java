@@ -40,4 +40,8 @@ public class GateFactory extends AbstractGateFactory {
 	public Stream<GateType> getGateTypes() {
 		return Stream.of(GateType.values());
 	}
+	
+	public static AbstractGateFactory getGateFactory() {
+		return new GateFactory();
+	}
 }

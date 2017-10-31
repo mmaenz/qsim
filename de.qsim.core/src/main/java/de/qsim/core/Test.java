@@ -1,14 +1,15 @@
 package de.qsim.core;
 
 import de.qsim.core.api.AbstractGateFactory;
-import de.qsim.core.api.GateProducer;
+import de.qsim.core.api.GateFactory;
 
 public class Test {
-	protected AbstractGateFactory gateFactory = GateProducer.getGateFactory();
+	protected AbstractGateFactory gateFactory = GateFactory.getGateFactory();
 	
 	public void doWork() {
 		gateFactory.getGateTypes().forEach(gate -> {
-			System.out.println(gate.toString());
+			System.out.println(
+					String.format("%s: %s", gate.toString(), gate.getDescription()));
 		});
 	}
 	
