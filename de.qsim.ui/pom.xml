@@ -4,12 +4,7 @@
 	<artifactId>de.qsim.ui</artifactId>
 
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/javax.vecmath/vecmath -->
-		<dependency>
-			<groupId>javax.vecmath</groupId>
-			<artifactId>vecmath</artifactId>
-			<version>1.5.2</version>
-		</dependency>
+
 	</dependencies>
 	<parent>
 		<groupId>de.qsim</groupId>

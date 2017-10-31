@@ -1,4 +1,4 @@
-package de.qsim.simulator;
+package de.qsim.core.simulator;
 
 public class SimulatorProvider {
 
