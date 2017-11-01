@@ -19,27 +19,31 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import de.qsim.core.simulator.model.SimulatorProject;
+import de.qsim.core.simulator.model.QSProject;
 
 public class Simulator {
-	private SimulatorProject simProject = null;
+	private QSProject simProject = null;
 	DocumentBuilder documentBuilder = null;
 	private Document doc = null;
 
-	public Simulator(String projectName) {
+	public Simulator() {
 		try {
-			simProject = new SimulatorProject(projectName);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			documentBuilder = dbf.newDocumentBuilder();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	public Simulator(String newProjectName) {
+		this();
+		simProject.setName(newProjectName);
+	}
 
-	public SimulatorProject loadProjectFromFile(String fileName) {
+	public QSProject loadProjectFromFile(String fileName) {
 		try {
 			doc = documentBuilder.parse(new File(fileName));
-			simProject.loadElement(doc.getDocumentElement());
+			simProject = new QSProject(doc.getDocumentElement());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -87,7 +91,6 @@ public class Simulator {
 			tr.setOutputProperty(OutputKeys.INDENT, "yes");
 			tr.setOutputProperty(OutputKeys.METHOD, "xml");
 			tr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-			tr.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "roles.dtd");
 			tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 			tr.transform(new DOMSource(document), new StreamResult(new FileOutputStream(fileName)));
 
@@ -99,7 +102,7 @@ public class Simulator {
 
 	}
 	
-	public SimulatorProject getProject() {
+	public QSProject getProject() {
 		return simProject;
 	}
 }

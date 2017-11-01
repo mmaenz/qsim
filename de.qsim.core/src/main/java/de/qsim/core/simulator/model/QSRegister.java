@@ -7,54 +7,40 @@ import org.w3c.dom.Element;
 
 import de.qsim.core.qubit.QuBit;
 
-public class SimulatorRegister extends AbstractElement {
+public class QSRegister extends AbstractQSElement {
 	public static String TYPE = "register";
-	private List<SimulatorRail> railList;
+	private List<IQSElement> railList;
 	private String name;
-	private ISimulatorElement parent;
+	private IQSElement parent;
 
-	public SimulatorRegister(String name, ISimulatorElement parent) {
+	public QSRegister(String name, IQSElement parent) {
 		super();
 		railList = new ArrayList<>();
 		this.name = name;
 		this.parent = parent;
 	}
-
 	
-	public SimulatorRegister(Element element, ISimulatorElement parent) throws Exception {
-		super();
+	public QSRegister(Element element, IQSElement parent) throws Exception {
+		super(element);
 		railList = new ArrayList<>();
+		this.parent = parent;
 		loadNode();
 		loadChildren();
-	}
-
-	@Override
-	protected void loadChildren(Element child) throws Exception {
-		final String nodeName = child.getNodeName();
-//		if (nodeName.equalsIgnoreCase(SimplePage.SIMPLE_TYPE)) {
-//			final SimplePage page = new SimplePage(child, this);
-//			railList.add(page);
-//		}
 	}
 
 	@Override
 	protected void loadNode() throws Exception {
 		this.name = getRequiredAttribute("name");
 	}
-
+	
 	@Override
 	public QuBit[] perform() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public void loadElement(Element xmlElement) {
-		// TODO Auto-generated method stub
-	}
-
-	public SimulatorRail addRail(String name) {
-		SimulatorRail rail = new SimulatorRail(name, this);
+	public QSRail addRail(String name) {
+		QSRail rail = new QSRail(name, this);
 		railList.add(rail);
 		return rail;
 	}
@@ -63,7 +49,7 @@ public class SimulatorRegister extends AbstractElement {
 		railList.remove(index);
 	}
 	
-	public void removeRail(SimulatorRail rail) {
+	public void removeRail(QSRail rail) {
 		railList.remove(rail);
 	}
 
@@ -72,10 +58,16 @@ public class SimulatorRegister extends AbstractElement {
 		Element node = xmlElement.getOwnerDocument().createElement(TYPE);
 		node.setAttribute("name", name);
 		xmlElement.appendChild(node);
-		for (ISimulatorElement simElement : railList) {
+		for (IQSElement simElement : railList) {
 			simElement.saveElement(node);
 		}
 		return xmlElement;
+	}
+
+
+	@Override
+	public List<IQSElement> getGenList() {
+		return railList;
 	}
 
 }

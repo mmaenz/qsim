@@ -4,18 +4,19 @@ import de.qsim.core.simulator.Simulator;
 
 public class SimulatorProvider {
 	private static Simulator instance = null;
-	
-	private static Simulator createSimulator(String name) {
-		instance = new Simulator(name);
+
+	public static Simulator getSimulator(String newProjectName) {
+		if (instance == null) {
+			instance = new Simulator(newProjectName);
+		}
 		return instance;
 	}
 
-	public static Simulator getSimulator(String name) {
+	public static Simulator getSimulator() {
 		if (instance == null) {
-			return createSimulator(name);
-		} else {
-			return instance;
+			instance = new Simulator();
 		}
+		return instance;
 	}
-	
+
 }

@@ -5,17 +5,21 @@ import java.util.List;
 
 import org.w3c.dom.Element;
 
+import de.qsim.core.api.GateFactory;
+import de.qsim.core.gate.GateType;
 import de.qsim.core.gate.IGate;
 import de.qsim.core.qubit.QuBit;
+import de.qsim.core.utils.Complex;
+import de.qsim.core.utils.XML;
 
-public class SimulatorRail extends AbstractElement {
+public class QSRail extends AbstractQSElement {
 	public static String TYPE = "rail";
 	private List<QuBit> qubitList;
 	private List<IGate> gateList;
 	private String name;
-	private ISimulatorElement parent;
+	private IQSElement parent;
 	
-	public SimulatorRail(String name, ISimulatorElement parent) {
+	public QSRail(String name, IQSElement parent) {
 		super();
 		gateList = new ArrayList<>();
 		qubitList = new ArrayList<>();
@@ -23,20 +27,31 @@ public class SimulatorRail extends AbstractElement {
 		this.parent = parent;
 	}
 
-	public SimulatorRail(Element element, ISimulatorElement parent) throws Exception {
-		super();
+	public QSRail(Element element, IQSElement parent) throws Exception {
+		super(element);
+		gateList = new ArrayList<>();
+		qubitList = new ArrayList<>();
 		this.parent = parent;
 		loadNode();
 		loadChildren();
 	}
 
 	@Override
-	protected void loadChildren(Element child) throws Exception {
-		final String nodeName = child.getNodeName();
-		// if (nodeName.equalsIgnoreCase(SimplePage.SIMPLE_TYPE)) {
-		// final SimplePage page = new SimplePage(child, this);
-		// genList.add(page);
-		// }
+	protected void loadChildren(Element xmlElement) throws Exception {
+		String text = xmlElement.getNodeName();
+		if (text.equalsIgnoreCase(QuBit.TYPE)) {
+			double r = getDoubleValueFromAttribute(xmlElement, "r1");
+			double i = getDoubleValueFromAttribute(xmlElement, "i1");
+			Complex no1 = new Complex(r, i);
+			r = getDoubleValueFromAttribute(xmlElement, "r2");
+			i = getDoubleValueFromAttribute(xmlElement, "i2");
+			Complex no2 = new Complex(r, i);
+			QuBit quBit = new QuBit(no1, no2);
+			qubitList.add(quBit);
+		} else if (text.equalsIgnoreCase(IGate.TYPE)) {
+			IGate gate = new GateFactory().getGate(GateType.valueOf(getRequiredAttribute(xmlElement, "name")));
+			gateList.add(gate);
+		}
 	}
 
 	@Override
@@ -103,10 +118,10 @@ public class SimulatorRail extends AbstractElement {
 	public void removeQuBit(QuBit quBit) {
 		qubitList.remove(quBit);
 	}
-
+	
 	@Override
-	public void loadElement(Element xmlElement) {
-		// TODO Auto-generated method stub
+	public List<IQSElement> getGenList() {
+		return null;
 	}
-
+	
 }

@@ -9,33 +9,29 @@ import org.w3c.dom.Node;
 
 import de.qsim.core.qubit.QuBit;
 
-public class SimulatorProject extends AbstractElement {
+public class QSProject extends AbstractQSElement {
 	public static final String TYPE = "project";
-	private final List<ISimulatorElement> genList;
+	private final List<IQSElement> genList;
 	private String name;
 	
-	public SimulatorProject(Element element) throws Exception {
+	public QSProject(Element element) throws Exception {
 		super(element);
 		genList = new ArrayList<>();
 		loadNode();
 		loadChildren();
 	}
 
-	public SimulatorProject(String name) {
+	public QSProject() {
 		super();
 		this.genList = new ArrayList<>();
-		this.name = name;
 	}
 	
-	@Override
-	protected void loadChildren(Element child) throws Exception {
-		final String nodeName = child.getNodeName();
-//		if (nodeName.equalsIgnoreCase(SimplePage.SIMPLE_TYPE)) {
-//			final SimplePage page = new SimplePage(child, this);
-//			genList.add(page);
-//		}
+	public QSProject(String newProjectName) {
+		super();
+		this.genList = new ArrayList<>();
+		this.name = newProjectName;
 	}
-
+	
 	@Override
 	protected void loadNode() throws Exception {
 		this.name = getRequiredAttribute("name");
@@ -43,19 +39,19 @@ public class SimulatorProject extends AbstractElement {
 	
 	@Override
 	public QuBit[] perform() throws Exception {
-		for (final ISimulatorElement element : genList) {
+		for (final IQSElement element : genList) {
 			element.perform();
 		}
 		return null;
 	}
 
-	public SimulatorRegister addRegister(String name) {
-		SimulatorRegister register = new SimulatorRegister(name, this);
+	public QSRegister addRegister(String name) {
+		QSRegister register = new QSRegister(name, this);
 		genList.add(register);
 		return register;
 	}
 	
-	public void removeRegister(SimulatorRegister register) {
+	public void removeRegister(QSRegister register) {
 		genList.remove(register);
 	}
 
@@ -67,20 +63,24 @@ public class SimulatorProject extends AbstractElement {
 		Element element = xmlDoc.createElement("project");
 		element.setAttribute("name", this.name);
 		xmlDoc.appendChild(element);
-		for (ISimulatorElement qusimElement : genList) {
+		for (IQSElement qusimElement : genList) {
 			qusimElement.saveElement(element);
 		}
 		return element;
 	}
 
-	@Override
-	public void loadElement(Element element) {
-		// TODO Auto-generated method stub
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public Element saveElement(Element xmlParent) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	public List<IQSElement> getGenList() {
+		return genList;
+	}
 }

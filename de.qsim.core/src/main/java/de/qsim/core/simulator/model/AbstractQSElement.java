@@ -10,15 +10,16 @@ import org.w3c.dom.Node;
 import de.qsim.core.simulator.exception.AbstractElementException;
 import de.qsim.core.simulator.exception.InvalidAttributeValueException;
 import de.qsim.core.simulator.exception.NoSuchExmlAttributeException;
+import de.qsim.core.utils.XML;
 
-public abstract class AbstractElement implements ISimulatorElement {
+public abstract class AbstractQSElement implements IQSElement {
 	private Element xmlElement;
-	//private ISimulatorElement 
+	//private IQSElement 
 	
-	public AbstractElement() {
+	public AbstractQSElement() {
 	}
 
-	public AbstractElement(Element element) {
+	public AbstractQSElement(Element element) {
 		this();
 		setNode(element);
 	}
@@ -35,7 +36,12 @@ public abstract class AbstractElement implements ISimulatorElement {
 	}
 
 	protected void loadChildren(Element xmlChild) throws Exception {
-		throw new InvalidAttributeValueException("No implementation found for 'loadChildren(Element child)' method");
+		String text = xmlChild.getNodeName();
+		if (text.equalsIgnoreCase(QSRegister.TYPE)) {
+			getGenList().add(new QSRegister(xmlChild, this));
+		} else if (text.equalsIgnoreCase(QSRail.TYPE)) {
+			getGenList().add(new QSRail(xmlChild, this));
+		} //else if (text.equalsIgnoreCase(QS))
 	}
 
 	protected Element saveNode() throws Exception {
@@ -103,6 +109,15 @@ public abstract class AbstractElement implements ISimulatorElement {
 		return xmlElement.getAttributes().getLength();
 	}
 
+	protected double getDoubleValueFromAttribute(Element element, String name) throws Exception {
+		final String attr = getRequiredAttribute(element, name);
+		if (attr.trim().isEmpty()) {
+			throw new InvalidAttributeValueException(String.format("Invalid attributevalue '%s'", name));
+		}
+		final double result = Double.parseDouble(attr.trim());
+		return result;
+	}
+
 	protected double getDoubleValueFromAttribute(String name) throws Exception {
 		final String attr = getRequiredAttribute(name);
 		if (attr.trim().isEmpty()) {
@@ -111,8 +126,8 @@ public abstract class AbstractElement implements ISimulatorElement {
 		final double result = Double.parseDouble(attr.trim());
 		return result;
 	}
-
-	public ISimulatorElement getParent() {
+	
+	public IQSElement getParent() {
 		return null;
 	}
 
