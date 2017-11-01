@@ -5,6 +5,7 @@ import java.util.Arrays;
 import de.qsim.core.utils.Complex;
 
 public class QuBit implements IQuBit {
+	public static String TYPE = "qubit";
 	protected Complex[] qubitVector;
 
 	public QuBit() {

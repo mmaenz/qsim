@@ -36,8 +36,12 @@ public class YGate implements IGate {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return GateType.YGate.getDescription();
+	}
+
+	@Override
+	public String toString() {
+		return "YGate";
 	}
 
 }

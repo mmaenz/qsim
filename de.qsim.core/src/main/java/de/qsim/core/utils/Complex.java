@@ -27,8 +27,16 @@ public class Complex {
 		return real;
 	}
 
+	public String getRealString() {
+		return Double.toString(real);
+	}
+	
 	public double getImaginary() {
 		return imaginary;
+	}
+
+	public String getImaginaryString() {
+		return Double.toString(imaginary);
 	}
 
 	public void setImaginary(double imaginary) {

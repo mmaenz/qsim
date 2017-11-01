@@ -6,7 +6,7 @@ public class IdentityGate implements IGate {
 
 	@Override
 	public String getDescription() {
-		return "EmptyGate";
+		return GateType.IdentityGate.getDescription();
 	}
 
 	@Override
@@ -14,4 +14,9 @@ public class IdentityGate implements IGate {
 		return inputQubit;
 	}
 	
+	@Override
+	public String toString() {
+		return "IdentityGate";
+	}
+
 }

@@ -11,9 +11,9 @@ import de.qsim.core.simulator.exception.AbstractElementException;
 import de.qsim.core.simulator.exception.InvalidAttributeValueException;
 import de.qsim.core.simulator.exception.NoSuchExmlAttributeException;
 
-public abstract class AbstractElement implements IQuSimElement {
+public abstract class AbstractElement implements ISimulatorElement {
 	private Element xmlElement;
-	//private IQuSimElement 
+	//private ISimulatorElement 
 	
 	public AbstractElement() {
 	}
@@ -112,7 +112,7 @@ public abstract class AbstractElement implements IQuSimElement {
 		return result;
 	}
 
-	public IQuSimElement getParent() {
+	public ISimulatorElement getParent() {
 		return null;
 	}
 

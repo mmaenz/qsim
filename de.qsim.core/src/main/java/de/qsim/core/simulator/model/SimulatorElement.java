@@ -5,11 +5,11 @@ import org.w3c.dom.Element;
 import de.qsim.core.gate.IGate;
 import de.qsim.core.qubit.QuBit;
 
-public class QuSimElement extends AbstractElement {
+public class SimulatorElement extends AbstractElement {
 	public static final String TYPE = "reference";
 	private String name;
 	
-	public QuSimElement(Element element, QuSimProject project, IQuSimElement parent) throws Exception {
+	public SimulatorElement(Element element, SimulatorProject project, ISimulatorElement parent) throws Exception {
 		super(element);
 	}
 	

@@ -36,6 +36,11 @@ public class XGate implements IGate {
 
 	@Override
 	public String getDescription() {
+		return GateType.XGate.getDescription();
+	}
+
+	@Override
+	public String toString() {
 		return "XGate";
 	}
 

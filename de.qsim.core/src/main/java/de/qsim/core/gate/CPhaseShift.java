@@ -29,8 +29,13 @@ public class CPhaseShift implements IGate {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return GateType.CPhaseShift.getDescription();
 	}
+	
+	@Override
+	public String toString() {
+		return "CPhaseShift";
+	}
+
 
 }

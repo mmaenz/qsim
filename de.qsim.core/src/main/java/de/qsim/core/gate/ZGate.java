@@ -35,8 +35,12 @@ public class ZGate implements IGate {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return GateType.ZGate.getDescription();
+	}
+
+	@Override
+	public String toString() {
+		return "ZGate";
 	}
 
 }

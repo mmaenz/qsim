@@ -1,18 +1,18 @@
 package de.qsim.core.api;
 
-import de.qsim.core.simulator.QuSimulator;
+import de.qsim.core.simulator.Simulator;
 
 public class SimulatorProvider {
-	private static QuSimulator instance = null;
+	private static Simulator instance = null;
 	
-	private static QuSimulator createSimulator() {
-		instance = new QuSimulator();
+	private static Simulator createSimulator(String name) {
+		instance = new Simulator(name);
 		return instance;
 	}
 
-	public static QuSimulator getBrowser() {
+	public static Simulator getSimulator(String name) {
 		if (instance == null) {
-			return createSimulator();
+			return createSimulator(name);
 		} else {
 			return instance;
 		}

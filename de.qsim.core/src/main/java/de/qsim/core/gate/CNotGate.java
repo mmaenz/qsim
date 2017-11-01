@@ -25,6 +25,11 @@ public class CNotGate implements IGate {
 
 	@Override
 	public String getDescription() {
+		return GateType.CNotGate.getDescription();
+	}
+	
+	@Override
+	public String toString() {
 		return "CNotGate";
 	}
 }

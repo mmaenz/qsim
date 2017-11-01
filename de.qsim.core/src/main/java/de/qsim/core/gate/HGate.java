@@ -41,6 +41,11 @@ public class HGate implements IGate {
 
 	@Override
 	public String getDescription() {
+		return GateType.HGate.getDescription();
+	}
+
+	@Override
+	public String toString() {
 		return "HGate";
 	}
 

@@ -5,8 +5,8 @@ import org.w3c.dom.Element;
 import de.qsim.core.gate.IGate;
 import de.qsim.core.qubit.QuBit;
 
-public interface IQuSimElement {
-	public abstract Element saveElement(Element element);
+public interface ISimulatorElement {
+	public abstract Element saveElement(Element xmlParent);
 	public abstract QuBit[] perform() throws Exception;
-	public abstract void loadElement(Element element);
+	public abstract void loadElement(Element xmlElement);
 }
