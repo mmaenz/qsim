@@ -8,11 +8,10 @@ import de.qsim.core.utils.Complex;
 public class XGate implements IGate {
 
 	@Override
-	public QuBit applyGate(QuBit inputQubit, int[] targetPosition,
-			int[] conditions, int noOfEntangledQubits) {
+	public QuBit[] applyGate(QuBit[] inputQubit, int[] targetPosition, int[] conditions, int noOfEntangledQubits) {
 		int mask = 0;
 		int newPosition = 0;
-		Complex[] states = inputQubit.getQubit();
+		Complex[] states = inputQubit[0].getQubit();
 		Complex bufferState;
 		int[] markedStates = new int[states.length];
 		for (int i : targetPosition) {
@@ -31,9 +30,9 @@ public class XGate implements IGate {
 			}
 			mask = 0;
 		}
-		return new QuBit(states);
-
-}
+		QuBit ret[] = { new QuBit(states) };
+		return ret;
+	}
 
 	@Override
 	public String getDescription() {

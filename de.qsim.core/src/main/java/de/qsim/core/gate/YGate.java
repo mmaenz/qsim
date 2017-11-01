@@ -8,11 +8,10 @@ import de.qsim.core.utils.Complex;
 public class YGate implements IGate {
 
 	@Override
-	public QuBit applyGate(QuBit inputQubit, int[] targetPosition,
-			int[] conditions, int noOfEntangledQubits) {
+	public QuBit[] applyGate(QuBit[] inputQubit, int[] targetPosition, int[] conditions, int noOfEntangledQubits) {
 		int mask = 0;
 		int newPosition = 0;
-		Complex[] states = inputQubit.getQubit();
+		Complex[] states = inputQubit[0].getQubit();
 		Complex bufferState;
 		int[] markedStates = new int[states.length];
 		for (int i : targetPosition) {
@@ -22,10 +21,8 @@ public class YGate implements IGate {
 				if (markedStates[j] == 0) {
 					newPosition = j ^ mask;
 					bufferState = states[j];
-					states[j] = Complex.multiply(new Complex(0.0,
-							-1.0), states[newPosition]);
-					states[newPosition] = Complex.multiply(
-							new Complex(0.0, 1.0), bufferState);
+					states[j] = Complex.multiply(new Complex(0.0, -1.0), states[newPosition]);
+					states[newPosition] = Complex.multiply(new Complex(0.0, 1.0), bufferState);
 					markedStates[j] = 1;
 					markedStates[newPosition] = 1;
 				}
@@ -33,9 +30,9 @@ public class YGate implements IGate {
 			}
 			mask = 0;
 		}
-		return new QuBit(states);
-
-}
+		QuBit ret[] = { new QuBit(states) };
+		return ret;
+	}
 
 	@Override
 	public String getDescription() {

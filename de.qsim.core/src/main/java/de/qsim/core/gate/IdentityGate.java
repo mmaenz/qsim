@@ -10,7 +10,7 @@ public class IdentityGate implements IGate {
 	}
 
 	@Override
-	public QuBit applyGate(QuBit inputQubit, int[] targetPosition, int[] conditions, int noOfEntangledQubits) {
+	public QuBit[] applyGate(QuBit[] inputQubit, int[] targetPosition, int[] conditions, int noOfEntangledQubits) {
 		return inputQubit;
 	}
 	

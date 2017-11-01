@@ -7,6 +7,9 @@ import de.qsim.core.utils.Complex;
 public class QuBit implements IQuBit {
 	protected Complex[] qubitVector;
 
+	public QuBit() {
+	}
+	
 	public QuBit(Complex no0, Complex no1) {
 		qubitVector = new Complex[2];
 		qubitVector[0] = no0;

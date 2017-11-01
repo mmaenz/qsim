@@ -6,12 +6,12 @@ import de.qsim.core.utils.Complex;
 public class CPhaseShift implements IGate {
 
 	@Override
-	public QuBit applyGate(QuBit inputQubit, int[] targetPosition,
+	public QuBit[] applyGate(QuBit[] inputQubit, int[] targetPosition,
 			int[] conditions, int noOfEntangledQubits) {
 		int mask = 0;
 		int new_position = 0;
 
-		Complex[] states = inputQubit.getQubit();
+		Complex[] states = inputQubit[0].getQubit();
 		for (int i : conditions) {
 			mask |= (1 << (noOfEntangledQubits - 1 - i));
 		}
@@ -23,7 +23,8 @@ public class CPhaseShift implements IGate {
 		states[new_position] = Complex.multiply(states[new_position],
 				new Complex(-1.0, 0.0));
 
-		return new QuBit(states);
+		QuBit ret[] = {new QuBit(states)}; 
+		return ret;
 }
 
 	@Override

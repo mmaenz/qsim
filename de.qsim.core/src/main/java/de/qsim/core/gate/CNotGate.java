@@ -5,12 +5,12 @@ import de.qsim.core.utils.Complex;
 
 public class CNotGate implements IGate {
 	@Override
-	public QuBit applyGate(QuBit inputQubit, int[] targetPosition,
+	public QuBit[] applyGate(QuBit[] inputQubit, int[] targetPosition,
 			int[] conditions, int noOfEntangledQubits) {
 
 		int mask = 0;
 		int newPosition = 0;
-		Complex[] states = inputQubit.getQubit();
+		Complex[] states = inputQubit[0].getQubit();
 		for (int i : conditions) {
 			mask |= (1 << (noOfEntangledQubits - 1 - i));
 		}
@@ -19,8 +19,8 @@ public class CNotGate implements IGate {
 		Complex state = states[mask];
 		states[mask] = states[newPosition];
 		states[newPosition] = state;
-
-		return new QuBit(states);
+		QuBit ret[] = {new QuBit(states)}; 
+		return ret;
 }
 
 	@Override
