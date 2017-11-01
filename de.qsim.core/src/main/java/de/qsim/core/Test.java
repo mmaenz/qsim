@@ -1,6 +1,7 @@
 package de.qsim.core;
 
 import de.qsim.core.api.GateProvider;
+import de.qsim.core.api.JythonProvider;
 import de.qsim.core.api.SimulatorProvider;
 import de.qsim.core.gate.AbstractGateFactory;
 import de.qsim.core.gate.GateType;
@@ -10,6 +11,7 @@ import de.qsim.core.simulator.Simulator;
 import de.qsim.core.simulator.model.QSProject;
 import de.qsim.core.simulator.model.QSRail;
 import de.qsim.core.simulator.model.QSRegister;
+import de.qsim.core.simulator.source.engine.Jython;
 import de.qsim.core.utils.Complex;
 
 public class Test {
@@ -38,6 +40,10 @@ public class Test {
 		sim.loadProjectFromFile("/Users/mmaenz/quantum.xml");
 	}
 
+	private void doJython() {
+		Jython jy = JythonProvider.getEngine();
+	}
+
 	public Test() {
 		System.out.println("QuantumSimulator");
 	}
@@ -45,6 +51,6 @@ public class Test {
 	public static void main(String[] args) {
 		new Test().doSave();
 		new Test().doLoad();
+		new Test().doJython();
 	}
-
 }
