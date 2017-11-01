@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.w3c.dom.Element;
 
-import de.qsim.core.api.GateFactory;
+import de.qsim.core.gate.GateFactory;
 import de.qsim.core.gate.GateType;
 import de.qsim.core.gate.IGate;
 import de.qsim.core.qubit.QuBit;

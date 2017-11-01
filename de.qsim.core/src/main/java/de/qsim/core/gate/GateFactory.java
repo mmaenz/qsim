@@ -1,16 +1,6 @@
-package de.qsim.core.api;
+package de.qsim.core.gate;
 
 import java.util.stream.Stream;
-
-import de.qsim.core.gate.CNotGate;
-import de.qsim.core.gate.CPhaseShift;
-import de.qsim.core.gate.IdentityGate;
-import de.qsim.core.gate.GateType;
-import de.qsim.core.gate.HGate;
-import de.qsim.core.gate.IGate;
-import de.qsim.core.gate.XGate;
-import de.qsim.core.gate.YGate;
-import de.qsim.core.gate.ZGate;
 
 public class GateFactory extends AbstractGateFactory {
 
