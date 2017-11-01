@@ -4,6 +4,7 @@ import de.qsim.core.api.GateProvider;
 import de.qsim.core.api.SimulatorProvider;
 import de.qsim.core.gate.AbstractGateFactory;
 import de.qsim.core.gate.GateType;
+import de.qsim.core.gate.IGate;
 import de.qsim.core.qubit.QuBit;
 import de.qsim.core.simulator.Simulator;
 import de.qsim.core.simulator.model.QSProject;
@@ -25,8 +26,9 @@ public class Test {
 		QSProject proj = sim.getProject();
 		QSRegister reg = proj.addRegister("Neues Register");
 		QSRail rail = reg.addRail("testrail");
-		rail.addQuBit(new QuBit(new Complex(15.25, 0.123), new Complex(20.25, 123.00)));
-		rail.addGate(gf.getGate(GateType.IdentityGate));
+		rail.addQuBit(new QuBit(new Complex(15.25, 0.123), new Complex(20.25, 123.00)), "XYZ");
+		IGate gate = gf.getGate(GateType.IdentityGate);
+		rail.addGate(gate, gate.getDescription());
 		sim.saveProjectToFile("/Users/mmaenz/quantum.xml", "This is just a test source!");
 		System.out.println("Done");
 	}
@@ -41,7 +43,7 @@ public class Test {
 	}
 	
 	public static void main(String[] args) {
-		//new Test().doSave();
+		new Test().doSave();
 		new Test().doLoad();
 	}
 

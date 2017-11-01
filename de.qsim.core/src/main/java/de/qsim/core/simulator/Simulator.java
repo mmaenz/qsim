@@ -27,6 +27,7 @@ public class Simulator {
 	private Document doc = null;
 
 	public Simulator() {
+		simProject = new QSProject();
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			documentBuilder = dbf.newDocumentBuilder();
