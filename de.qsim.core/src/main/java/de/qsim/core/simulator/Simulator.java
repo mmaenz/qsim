@@ -19,15 +19,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import de.qsim.core.simulator.model.QSProject;
+import de.qsim.core.model.Project;
 
 public class Simulator {
-	private QSProject simProject = null;
+	private Project project = null;
 	DocumentBuilder documentBuilder = null;
 	private Document doc = null;
 
 	public Simulator() {
-		simProject = new QSProject();
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			documentBuilder = dbf.newDocumentBuilder();
@@ -36,19 +35,19 @@ public class Simulator {
 		}
 	}
 	
-	public Simulator(String newProjectName) {
-		this();
-		simProject.setName(newProjectName);
+	public Project createProject() {
+		this.project = new Project();
+		return this.project; 
 	}
-
-	public QSProject loadProjectFromFile(String fileName) {
+	
+	public Project loadProjectFromFile(String fileName) {
 		try {
 			doc = documentBuilder.parse(new File(fileName));
-			simProject = new QSProject(doc.getDocumentElement());
+			project = new Project(doc.getDocumentElement());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return simProject;
+		return project;
 	}
 
 	public String getSourceFromProject() {
@@ -67,13 +66,13 @@ public class Simulator {
 
 	public boolean saveProjectToFile(String fileName) {
 		Document document = documentBuilder.newDocument();
-		simProject.saveElement(document);
+		project.saveElement(document);
 		return writeOutput(document, fileName);
 	}
 
 	public boolean saveProjectToFile(String fileName, String source) {
 		Document document = documentBuilder.newDocument();
-		simProject.saveElement(document);
+		project.saveElement(document);
 		Node node = document.createElement("source");
 		
 		try {
@@ -103,7 +102,7 @@ public class Simulator {
 
 	}
 	
-	public QSProject getProject() {
-		return simProject;
+	public Project getProject() {
+		return project;
 	}
 }

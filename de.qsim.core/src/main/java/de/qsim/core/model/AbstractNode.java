@@ -1,4 +1,4 @@
-package de.qsim.core.simulator.model;
+package de.qsim.core.model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -7,25 +7,23 @@ import java.util.List;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import de.qsim.core.simulator.exception.AbstractElementException;
-import de.qsim.core.simulator.exception.InvalidAttributeValueException;
-import de.qsim.core.simulator.exception.NoSuchExmlAttributeException;
-import de.qsim.core.utils.XML;
+import de.qsim.core.model.exception.AbstractNodeException;
+import de.qsim.core.model.exception.InvalidAttributeValueException;
+import de.qsim.core.model.exception.NoSuchExmlAttributeException;
 
-public abstract class AbstractQSElement implements IQSElement {
+public abstract class AbstractNode {
 	private Element xmlElement;
-	//private IQSElement 
 	
-	public AbstractQSElement() {
+	public AbstractNode() {
 	}
 
-	public AbstractQSElement(Element element) {
+	public AbstractNode(Element element) {
 		this();
 		setNode(element);
 	}
 
 	protected void loadNode() throws Exception {
-		new AbstractElementException("No implementation found!");
+		throw new AbstractNodeException("No implementation found!");
 	}
 
 	protected void loadChildren() throws Exception {
@@ -36,28 +34,15 @@ public abstract class AbstractQSElement implements IQSElement {
 	}
 
 	protected void loadChildren(Element xmlChild) throws Exception {
-		String text = xmlChild.getNodeName();
-		if (text.equalsIgnoreCase(QSRegister.TYPE)) {
-			getGenList().add(new QSRegister(xmlChild, this));
-		} else if (text.equalsIgnoreCase(QSRail.TYPE)) {
-			getGenList().add(new QSRail(xmlChild, this));
-		} //else if (text.equalsIgnoreCase(QS))
+		throw new AbstractNodeException("No implementation found!");
 	}
 
 	protected Element saveNode() throws Exception {
-		throw new AbstractElementException("No implementation found!");
-	}
-	
-	protected Element saveChildren() throws Exception {
-		for (final Iterator<Element> iterator = getChildren().iterator(); iterator.hasNext();) {
-			final Element xmlChild = iterator.next();
-			saveChildren(xmlChild);
-		}
-		return this.xmlElement;
+		throw new AbstractNodeException("No implementation found!");
 	}
 	
 	protected void saveChildren(Element xmlChild) throws Exception {
-		throw new AbstractElementException("No implementation found for 'saveChildren(Element child)' method");
+		throw new AbstractNodeException("No implementation found!");
 	}
 	
 	protected void setNode(Element xmlElement) {
@@ -68,7 +53,7 @@ public abstract class AbstractQSElement implements IQSElement {
 		return getChildren(xmlElement);
 	}
 
-	public List<Element> getChildren(Element xmlElement) {
+	protected List<Element> getChildren(Element xmlElement) {
 		final List<Element> result = new ArrayList<>();
 		for (Node node = xmlElement.getFirstChild(); node != null; node = node.getNextSibling()) {
 			if (node instanceof Element) {
@@ -127,8 +112,4 @@ public abstract class AbstractQSElement implements IQSElement {
 		return result;
 	}
 	
-	public IQSElement getParent() {
-		return null;
-	}
-
 }

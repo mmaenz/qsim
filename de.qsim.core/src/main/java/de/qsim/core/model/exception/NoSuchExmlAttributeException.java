@@ -1,4 +1,4 @@
-package de.qsim.core.simulator.exception;
+package de.qsim.core.model.exception;
 
 public class NoSuchExmlAttributeException extends Exception {
 	

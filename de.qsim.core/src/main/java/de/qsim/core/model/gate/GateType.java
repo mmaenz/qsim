@@ -1,4 +1,4 @@
-package de.qsim.core.gate;
+package de.qsim.core.model.gate;
 
 public enum GateType {
 	/**

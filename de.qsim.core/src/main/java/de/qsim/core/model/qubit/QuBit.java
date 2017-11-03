@@ -1,20 +1,24 @@
-package de.qsim.core.qubit;
+package de.qsim.core.model.qubit;
 
 import java.util.Arrays;
+import java.util.List;
 
+import org.w3c.dom.Element;
+
+import de.qsim.core.model.IElement;
+import de.qsim.core.model.Project;
 import de.qsim.core.utils.Complex;
 
-public class QuBit implements IQuBit {
+public class QuBit extends AbstractQuBit {
 	public static String TYPE = "qubit";
-	protected Complex[] qubitVector;
-
-	public QuBit() {
-	}
 	
-	public QuBit(Complex no0, Complex no1) {
-		qubitVector = new Complex[2];
-		qubitVector[0] = no0;
-		qubitVector[1] = no1;
+	
+	public QuBit(Element element, Project project, IElement parent) throws Exception {
+		super(element, project, parent);
+	}
+
+	public QuBit(String name, Complex no0, Complex no1) {
+		super(name, no0, no1);
 	}
 
 	/**
@@ -23,8 +27,8 @@ public class QuBit implements IQuBit {
 	 * @param qubitVector
 	 *            an array of 2 complex numbers
 	 */
-	public QuBit(Complex[] qubitVector) {
-		this.qubitVector = Arrays.copyOf(qubitVector, qubitVector.length);
+	public QuBit(String name, Complex[] qubitVector) {
+		super(name, qubitVector);
 	}
 
 	/**
@@ -32,8 +36,8 @@ public class QuBit implements IQuBit {
 	 * 
 	 * @return qubit
 	 */
-	@Override
-	public Complex[] getQubit() {
+
+	public Complex[] getComplex() {
 		Complex[] copyOfQubitVector = qubitVector;
 		return copyOfQubitVector;
 	}
@@ -65,11 +69,11 @@ public class QuBit implements IQuBit {
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof QuBit) {
-			if (this.qubitVector.length != ((QuBit) o).getQubit().length) {
+			if (this.qubitVector.length != ((QuBit) o).getComplex().length) {
 				return false;
 			}
 			for (int i = 0; i < this.qubitVector.length; i++) {
-				if (this.qubitVector[i].equals(((QuBit) o).getQubit()[i]) == false) {
+				if (this.qubitVector[i].equals(((QuBit) o).getComplex()[i]) == false) {
 					return false;
 				}
 			}
@@ -95,7 +99,7 @@ public class QuBit implements IQuBit {
 	 * 
 	 * @return true if the state is valid, otherwise false
 	 */
-	@Override
+
 	public boolean isValid() {
 		double sum = 0.0;
 		for (Complex c : this.qubitVector) {
@@ -103,6 +107,24 @@ public class QuBit implements IQuBit {
 			sum += mod * mod;
 		}
 		return (sum == 1.0);
+	}
+
+	@Override
+	public Element saveElement(Element xmlParent) {
+		Element node = xmlParent.getOwnerDocument().createElement(TYPE);
+		node.setAttribute("name", getName());
+		node.setAttribute("r1", Double.toString(qubitVector[0].getReal()));
+		node.setAttribute("r2", Double.toString(qubitVector[1].getReal()));
+		node.setAttribute("i1", Double.toString(qubitVector[0].getImaginary()));
+		node.setAttribute("i2", Double.toString(qubitVector[1].getImaginary()));
+		xmlParent.appendChild(node);
+		return xmlParent;
+	}
+
+	@Override
+	public List<QuBit> perform() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

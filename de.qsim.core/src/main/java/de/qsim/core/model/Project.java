@@ -1,4 +1,4 @@
-package de.qsim.core.simulator.model;
+package de.qsim.core.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,51 +7,54 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import de.qsim.core.qubit.QuBit;
+import de.qsim.core.model.qubit.QuBit;
 
-public class QSProject extends AbstractQSElement {
+public class Project extends AbstractNode implements IElement {
 	public static final String TYPE = "project";
-	private final List<IQSElement> genList;
+	private final List<IElement> genList;
 	private String name;
 	
-	public QSProject(Element element) throws Exception {
+	public Project(Element element) throws Exception {
 		super(element);
 		genList = new ArrayList<>();
 		loadNode();
 		loadChildren();
 	}
 
-	public QSProject() {
-		super();
-		this.genList = new ArrayList<>();
-	}
-	
-	public QSProject(String newProjectName) {
-		super();
-		this.genList = new ArrayList<>();
-		this.name = newProjectName;
+	public Project() {
+		genList = new ArrayList<>();
 	}
 	
 	@Override
 	protected void loadNode() throws Exception {
 		this.name = getRequiredAttribute("name");
 	}
+
+	@Override
+	protected void loadChildren(Element child) throws Exception {
+		final String nodeName = child.getNodeName();
+		if (nodeName.equalsIgnoreCase(Register.TYPE)) {
+			final Register instance = new Register(child, this, this);
+			genList.add(instance);
+		}
+	}
+
 	
 	@Override
-	public QuBit[] perform() throws Exception {
-		for (final IQSElement element : genList) {
+	public List<QuBit> perform() throws Exception {
+		for (final IElement element : genList) {
 			element.perform();
 		}
 		return null;
 	}
 
-	public QSRegister addRegister(String name) {
-		QSRegister register = new QSRegister(name, this);
+	public Register createRegister(String name) throws Exception {
+		IElement register = new Register(name, this, this);
 		genList.add(register);
-		return register;
+		return (Register)register;
 	}
 	
-	public void removeRegister(QSRegister register) {
+	public void removeRegister(Register register) {
 		genList.remove(register);
 	}
 
@@ -63,7 +66,7 @@ public class QSProject extends AbstractQSElement {
 		Element element = xmlDoc.createElement("project");
 		element.setAttribute("name", this.name);
 		xmlDoc.appendChild(element);
-		for (IQSElement qusimElement : genList) {
+		for (IElement qusimElement : genList) {
 			qusimElement.saveElement(element);
 		}
 		return element;
@@ -79,8 +82,4 @@ public class QSProject extends AbstractQSElement {
 		return null;
 	}
 
-	@Override
-	public List<IQSElement> getGenList() {
-		return genList;
-	}
 }
