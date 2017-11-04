@@ -1,6 +1,6 @@
 package de.qsim.core.utils;
 
-public class Complex {
+public strictfp class Complex {
 	private double imaginary;
 	private double real;
 
@@ -62,63 +62,63 @@ public class Complex {
 		return Math.atan2(this.imaginary, this.real);
 	}
 
-	public static Complex add(Complex z1, Complex z2) {
+	public strictfp static Complex add(Complex z1, Complex z2) {
 		return new Complex(z1.getReal() + z2.getReal(), z1.getImaginary() + z2.getImaginary());
 	}
 
-	public static Complex multiply(Complex z1, Complex z2) {
+	public strictfp static Complex multiply(Complex z1, Complex z2) {
 		return new Complex(z1.getReal() * z2.getReal() - z1.getImaginary() * z2.getImaginary(),
 				z1.getReal() * z2.getImaginary() + z1.getImaginary() * z2.getReal());
 	}
 
-	public static Complex subtract(Complex z1, Complex z2) {
+	public strictfp static Complex subtract(Complex z1, Complex z2) {
 
 		return new Complex(z1.getReal() - z2.getReal(), z1.getImaginary() - z2.getImaginary());
 	}
 
-	public static Complex divide(Complex z1, Complex z2) {
+	public strictfp static Complex divide(Complex z1, Complex z2) {
 		Complex numerator = multiply(z1, conjugate(z2));
 		double denominator = Math.pow(mod(z2), 2);
 		return new Complex(numerator.getReal() / denominator, numerator.getImaginary() / denominator);
 	}
 
-	public static Complex conjugate(Complex z) {
+	public strictfp static Complex conjugate(Complex z) {
 
 		return new Complex(z.getReal(), -z.getImaginary());
 	}
 
-	public static double mod(Complex z) {
+	public strictfp static double mod(Complex z) {
 
 		return Math.sqrt(Math.pow(z.getReal(), 2) + Math.pow(z.getImaginary(), 2));
 	}
 
-	public static Complex square(Complex z) {
+	public strictfp static Complex square(Complex z) {
 		return new Complex(z.getReal() * z.getReal() - z.getImaginary() * z.getImaginary(),
 				2 * z.getReal() * z.getImaginary());
 	}
 
-	public static Complex sin(Complex z) {
+	public strictfp static Complex sin(Complex z) {
 		double exp = Math.exp(z.getImaginary());
 		return new Complex(Math.sin(z.getReal()) * (exp + 1 / exp) / 2.0,
 				Math.cos(z.getReal()) * (exp - 1 / exp) / 2.0);
 	}
 
-	public static Complex cos(Complex z) {
+	public strictfp static Complex cos(Complex z) {
 		double exp = Math.exp(z.getImaginary());
 		return new Complex(Math.cos(z.getReal()) * (exp + 1 / exp) / 2.0,
 				-Math.sin(z.getReal()) * (exp - 1 / exp) / 2.0);
 	}
 
-	public static Complex tan(Complex z) {
+	public strictfp static Complex tan(Complex z) {
 		return divide(sin(z), cos(z));
 	}
 
-	public static Complex exp(Complex z) {
+	public strictfp static Complex exp(Complex z) {
 		double r = Math.exp(z.getReal());
 		return new Complex(r * Math.cos(z.getImaginary()), r * Math.sin(z.getImaginary()));
 	}
 
-	public static Complex pow(Complex z, int power) {
+	public strictfp static Complex pow(Complex z, int power) {
 		double realValue = z.getReal();
 		double imaginaryValue = z.getImaginary();
 		for (int i = 0; i < power - 1; i++) {
@@ -131,24 +131,24 @@ public class Complex {
 
 	}
 
-	public static Complex inverse(Complex z) {
+	public strictfp static Complex inverse(Complex z) {
 		return divide(new Complex(1, 0), z);
 	}
 
-	public static Complex multiply(Complex z, double constant) {
+	public static strictfp Complex multiply(Complex z, double constant) {
 		return new Complex(z.getReal() * constant, z.getImaginary() * constant);
 	}
 
-	public static Complex add(Complex z, double constant) {
+	public strictfp static Complex add(Complex z, double constant) {
 		return new Complex(z.getReal() + constant, z.getImaginary());
 	}
 
-	public static Complex subtract(Complex z, double constant) {
+	public strictfp static Complex subtract(Complex z, double constant) {
 
 		return new Complex(z.getReal() - constant, z.getImaginary());
 	}
 
-	public static Complex divide(Complex z, double constant) {
+	public strictfp static Complex divide(Complex z, double constant) {
 		return new Complex(z.getReal() / constant, z.getImaginary() / constant);
 	}
 }

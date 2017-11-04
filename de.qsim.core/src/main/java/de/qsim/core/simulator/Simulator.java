@@ -20,6 +20,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import de.qsim.core.model.Project;
+import de.qsim.core.simulator.exception.NoProjectException;
 
 public class Simulator {
 	private Project project = null;
@@ -100,6 +101,14 @@ public class Simulator {
 		}
 		return true;
 
+	}
+	
+	public boolean run() throws Exception {
+		if (project == null) {
+			throw new NoProjectException();
+		}
+		project.perform();
+		return true;
 	}
 	
 	public Project getProject() {

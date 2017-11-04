@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.w3c.dom.Element;
 
+import de.qsim.core.model.gate.GateFactory;
+import de.qsim.core.model.gate.GateType;
 import de.qsim.core.model.gate.IGate;
 import de.qsim.core.model.qubit.QuBit;
 
@@ -28,6 +30,22 @@ public class Rail extends AbstractElement {
 	}
 
 	@Override
+	protected void loadChildren(Element xmlElement) throws Exception {
+		final String nodeName = xmlElement.getNodeName();
+		if (nodeName.equalsIgnoreCase(QuBit.TYPE)) {
+			final QuBit instance = new QuBit(xmlElement, getProject(), this);
+			qubitList.add(instance);
+			getGenList().add(instance);
+		} else if (nodeName.equalsIgnoreCase(IGate.TYPE)) {
+			GateFactory gf = GateFactory.getGateFactory();
+			String type = getRequiredAttribute(xmlElement, "type");
+			IGate gate = gf.createGate(GateType.valueOf(type), xmlElement, getProject(), getParent());
+			gateList.add(gate);
+			getGenList().add(gate);
+		}
+	}
+
+	@Override
 	public Element saveElement(Element xmlElement) {
 		Element node = xmlElement.getOwnerDocument().createElement(TYPE);
 		node.setAttribute("name", getName());
@@ -40,9 +58,22 @@ public class Rail extends AbstractElement {
 
 	@Override
 	public List<QuBit> perform() throws Exception {
-			// qubitList = gate.applyGate(inputQubit, targetPosition,
-			// conditions, noOfEntangledQubits);
-		return null;
+		List<QuBit> quBits = new ArrayList<>();
+		System.out.println("Input-QuBits:");
+		for (IElement bit : qubitList) {
+			quBits.add((QuBit) bit);
+			System.out.println(String.format("%s: %s", ((QuBit)bit).getName(), bit.toString()));
+		}
+
+		for (IGate gate : gateList) {
+			System.out.println(String.format("Apply to %s", gate.toString()));
+			quBits = gate.applyGate(quBits);
+			System.out.println("Output-QuBits:");
+			for (QuBit bit : quBits) {
+				System.out.println(String.format("%s: %s", ((QuBit)bit).getName(), bit.toString()));
+			}
+		}
+		return quBits;
 	}
 
 	public void addQuBit(QuBit quBit) {
@@ -75,6 +106,12 @@ public class Rail extends AbstractElement {
 	public boolean removeQuBit(IElement quBit) {
 		qubitList.remove(quBit);
 		return getGenList().remove(quBit);
-		
+
+	}
+
+	@Override
+	public List<QuBit> step() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

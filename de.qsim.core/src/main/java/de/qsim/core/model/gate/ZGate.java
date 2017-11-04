@@ -11,7 +11,7 @@ import de.qsim.core.model.Project;
 import de.qsim.core.model.qubit.QuBit;
 import de.qsim.core.utils.Complex;
 
-public class ZGate extends AbstractGate implements IGate {
+public strictfp class ZGate extends AbstractGate implements IGate {
 
 	public ZGate(Element element, Project project, IElement parent) throws Exception {
 		super(element, project, parent, GateType.ZGate.toString());
@@ -60,7 +60,12 @@ public class ZGate extends AbstractGate implements IGate {
 
 	@Override
 	public String toString() {
-		return "ZGate";
+		return getType();
 	}
 
+	@Override
+	public List<QuBit> step() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

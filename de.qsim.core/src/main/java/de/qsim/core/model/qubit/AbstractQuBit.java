@@ -9,7 +9,7 @@ import de.qsim.core.model.IElement;
 import de.qsim.core.model.Project;
 import de.qsim.core.utils.Complex;
 
-public abstract class AbstractQuBit extends AbstractNode implements IElement {
+public abstract strictfp class AbstractQuBit extends AbstractNode implements IElement {
 	protected Complex[] qubitVector;
 	protected String name;
 	protected Project project;

@@ -10,7 +10,7 @@ import de.qsim.core.model.Project;
 import de.qsim.core.model.qubit.QuBit;
 import de.qsim.core.utils.Complex;
 
-public class CPhaseShift extends AbstractGate implements IGate {
+public strictfp class CPhaseShift extends AbstractGate implements IGate {
 
 	public CPhaseShift(Element element, Project project, IElement parent) throws Exception {
 		super(element, project, parent, GateType.CPhaseShift.toString());
@@ -55,8 +55,12 @@ public class CPhaseShift extends AbstractGate implements IGate {
 	
 	@Override
 	public String toString() {
-		return "CPhaseShift";
+		return getType();
 	}
 
-
+	@Override
+	public List<QuBit> step() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

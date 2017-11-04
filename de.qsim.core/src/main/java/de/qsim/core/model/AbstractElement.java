@@ -45,14 +45,6 @@ public abstract class AbstractElement extends AbstractNode implements IElement {
 		} else if (nodeName.equalsIgnoreCase(Register.TYPE)) {
 			final Register instance = new Register(xmlElement, getProject(), this);
 			getGenList().add(instance);
-		} else if (nodeName.equalsIgnoreCase(QuBit.TYPE)) {
-			final QuBit instance = new QuBit(xmlElement, getProject(), this);
-			getGenList().add(instance);
-		} else if (nodeName.equalsIgnoreCase(IGate.TYPE)) {
-			GateFactory gf = GateFactory.getGateFactory();
-			String type = getRequiredAttribute(xmlElement, "type");
-			IGate gate = gf.createGate(GateType.valueOf(type), xmlElement, project, parent);
-			getGenList().add(gate);
 		}
 	}
 
@@ -78,6 +70,9 @@ public abstract class AbstractElement extends AbstractNode implements IElement {
 
 	@Override
 	public List<QuBit> perform() throws Exception {
+		for (IElement element : getGenList()) {
+			element.perform();
+		}
 		return null;
 	}
 

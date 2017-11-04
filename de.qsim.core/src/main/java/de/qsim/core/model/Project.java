@@ -82,4 +82,10 @@ public class Project extends AbstractNode implements IElement {
 		return null;
 	}
 
+	@Override
+	public List<QuBit> step() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

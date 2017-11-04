@@ -10,7 +10,7 @@ import de.qsim.core.model.Project;
 import de.qsim.core.model.qubit.QuBit;
 import de.qsim.core.utils.Complex;
 
-public class CNotGate extends AbstractGate implements IGate {
+public strictfp class CNotGate extends AbstractGate implements IGate {
 	
 	public CNotGate(Element element, Project project, IElement parent) throws Exception {
 		super(element, project, parent, GateType.CNotGate.toString());
@@ -50,6 +50,13 @@ public class CNotGate extends AbstractGate implements IGate {
 	
 	@Override
 	public String toString() {
-		return "CNotGate";
+		return getType();
 	}
+
+	@Override
+	public List<QuBit> step() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

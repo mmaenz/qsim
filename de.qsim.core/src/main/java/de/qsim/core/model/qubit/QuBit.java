@@ -127,4 +127,9 @@ public class QuBit extends AbstractQuBit {
 		return null;
 	}
 
+	@Override
+	public List<QuBit> step() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

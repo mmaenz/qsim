@@ -20,12 +20,6 @@ public class Register extends AbstractElement {
 		super(name, project, parent);
 	}
 	
-	@Override
-	public List<QuBit> perform() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public Rail createRail(String name) throws Exception {
 		IElement rail = new Rail(name, getProject(), this);
 		getGenList().add(rail);
@@ -49,5 +43,11 @@ public class Register extends AbstractElement {
 			simElement.saveElement(node);
 		}
 		return xmlElement;
+	}
+
+	@Override
+	public List<QuBit> step() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

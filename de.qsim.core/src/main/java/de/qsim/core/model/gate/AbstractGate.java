@@ -12,7 +12,7 @@ import de.qsim.core.model.AbstractElement;
 import de.qsim.core.model.IElement;
 import de.qsim.core.model.Project;
 
-public abstract class AbstractGate extends AbstractElement implements IElement {
+public abstract strictfp class AbstractGate extends AbstractElement implements IElement {
 	public static String typeTargetPosition = "targetPosition";
 	public static String typeConditions = "conditions";
 	public static String typeNoEntangled = "noEntangled";
@@ -60,7 +60,7 @@ public abstract class AbstractGate extends AbstractElement implements IElement {
 	@Override
 	public Element saveElement(Element xmlParent) {
 		Element node = xmlParent.getOwnerDocument().createElement(IGate.TYPE);
-		node.setAttribute("name", this.name);
+		node.setAttribute("name", this.getName());
 		node.setAttribute("type", this.type);
 		Element target = xmlParent.getOwnerDocument().createElement(typeTargetPosition);
 		target.setTextContent(targetPosition.toString());
@@ -105,6 +105,10 @@ public abstract class AbstractGate extends AbstractElement implements IElement {
 
 	public void setProject(Project project) {
 		this.project = project;
+	}
+
+	public String getType() {
+		return type;
 	}
 
 }

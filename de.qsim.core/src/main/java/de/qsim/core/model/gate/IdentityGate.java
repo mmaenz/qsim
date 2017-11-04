@@ -8,7 +8,7 @@ import de.qsim.core.model.IElement;
 import de.qsim.core.model.Project;
 import de.qsim.core.model.qubit.QuBit;
 
-public class IdentityGate extends AbstractGate implements IGate {
+public strictfp class IdentityGate extends AbstractGate implements IGate {
 
 	public IdentityGate(Element element, Project project, IElement parent) throws Exception {
 		super(element, project, parent, GateType.IdentityGate.toString());
@@ -34,6 +34,12 @@ public class IdentityGate extends AbstractGate implements IGate {
 	
 	@Override
 	public String toString() {
-		return "IdentityGate";
+		return getType();
+	}
+
+	@Override
+	public List<QuBit> step() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

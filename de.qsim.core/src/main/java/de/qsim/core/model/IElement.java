@@ -9,4 +9,5 @@ import de.qsim.core.model.qubit.QuBit;
 public interface IElement {
 	public abstract Element saveElement(Element xmlParent);
 	public abstract List<QuBit> perform() throws Exception;
+	public abstract List<QuBit> step() throws Exception;
 }
