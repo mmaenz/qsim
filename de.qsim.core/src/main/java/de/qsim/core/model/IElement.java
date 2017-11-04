@@ -10,4 +10,5 @@ public interface IElement {
 	public abstract Element saveElement(Element xmlParent);
 	public abstract List<QuBit> perform() throws Exception;
 	public abstract List<QuBit> step() throws Exception;
+	public abstract String getName();
 }

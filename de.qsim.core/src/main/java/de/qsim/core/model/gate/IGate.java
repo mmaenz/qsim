@@ -19,4 +19,5 @@ public interface IGate extends IElement {
 	public void setParent(IElement parent);
 	public void setProject(Project project);
 	public GateType getGateType();
+	public String getName();
 }

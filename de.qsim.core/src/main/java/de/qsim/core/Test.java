@@ -43,7 +43,7 @@ public class Test {
 		gate.setTargetPosition(test);
 		gate.setNoOfEntangledQubits(5);
 		rail.addGate(gate);
-		
+
 		sim.saveProjectToFile("/Users/mmaenz/quantum.xml", "This is just a test source!");
 		System.out.println("Saved: Done!");
 	}
@@ -51,6 +51,7 @@ public class Test {
 	private void doLoad() {
 		Simulator sim = SimulatorProvider.getSimulator();
 		sim.loadProjectFromFile("/Users/mmaenz/quantum.xml");
+		sim.saveProjectToFile("/Users/mmaenz/quantum1.xml");
 		System.out.println("Loading: Done!");
 	}
 
@@ -83,9 +84,9 @@ public class Test {
 	public static void main(String[] args) {
 		Test test = new Test();
 		try {
-			test.doSave();
+			//test.doSave();
 			test.doLoad();
-			test.doRun();
+			//test.doRun();
 			// new Test().doJython();
 		} catch (Exception e) {
 			e.printStackTrace();

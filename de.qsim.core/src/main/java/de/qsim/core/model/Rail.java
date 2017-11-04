@@ -57,6 +57,12 @@ public class Rail extends AbstractElement {
 	}
 
 	@Override
+	public List<QuBit> step() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public List<QuBit> perform() throws Exception {
 		List<QuBit> quBits = new ArrayList<>();
 		System.out.println("Input-QuBits:");
@@ -109,9 +115,33 @@ public class Rail extends AbstractElement {
 
 	}
 
-	@Override
-	public List<QuBit> step() throws Exception {
-		// TODO Auto-generated method stub
+	public QuBit getQuBitByName(String name) {
+		for (IElement bit : qubitList) {
+			if (((QuBit)bit).getName().equals(name)) {
+				return (QuBit)bit;
+			}
+		}
 		return null;
+	}
+	
+	public List<QuBit> getQuBitList() {
+		List<QuBit> quBits = new ArrayList<>();
+		for (IElement bit : qubitList) {
+			quBits.add((QuBit) bit);
+		}
+		return quBits;
+	}
+	
+	public IGate getGateByName(String name) {
+		for (IGate gate : gateList) {
+			if (gate.getName().equals(name)) {
+				return gate;
+			}
+		}
+		return null;
+	}
+
+	public List<IGate> getGateList() {
+		return gateList;
 	}
 }

@@ -12,17 +12,20 @@ import de.qsim.core.model.qubit.QuBit;
 public class Project extends AbstractNode implements IElement {
 	public static final String TYPE = "project";
 	private final List<IElement> genList;
+	private List<IElement> regList;
 	private String name;
 	
 	public Project(Element element) throws Exception {
 		super(element);
 		genList = new ArrayList<>();
+		regList = new ArrayList<>();
 		loadNode();
 		loadChildren();
 	}
 
 	public Project() {
 		genList = new ArrayList<>();
+		regList = new ArrayList<>();
 	}
 	
 	@Override
@@ -36,10 +39,10 @@ public class Project extends AbstractNode implements IElement {
 		if (nodeName.equalsIgnoreCase(Register.TYPE)) {
 			final Register instance = new Register(child, this, this);
 			genList.add(instance);
+			regList.add(instance);
 		}
 	}
 
-	
 	@Override
 	public List<QuBit> perform() throws Exception {
 		for (final IElement element : genList) {
@@ -51,15 +54,17 @@ public class Project extends AbstractNode implements IElement {
 	public Register createRegister(String name) throws Exception {
 		IElement register = new Register(name, this, this);
 		genList.add(register);
+		regList.add(register);
 		return (Register)register;
 	}
 	
 	public void removeRegister(Register register) {
 		genList.remove(register);
+		regList.remove(register);
 	}
 
 	public void removeRegister(int index) {
-		genList.remove(index);
+		regList.remove(genList.remove(index));
 	}
 	
 	public Element saveElement(Document xmlDoc) {
@@ -72,6 +77,15 @@ public class Project extends AbstractNode implements IElement {
 		return element;
 	}
 
+	public List<Register> getRegisterList() {
+		List<Register> ret = new ArrayList<>();
+		for (IElement reg : regList) {
+			ret.add((Register)reg);
+		}
+		return ret;
+
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -86,6 +100,11 @@ public class Project extends AbstractNode implements IElement {
 	public List<QuBit> step() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public String getName() {
+		return this.name;
 	}
 
 }

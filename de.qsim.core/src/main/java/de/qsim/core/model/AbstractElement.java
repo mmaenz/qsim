@@ -36,18 +36,6 @@ public abstract class AbstractElement extends AbstractNode implements IElement {
 		setName(getRequiredAttribute("name"));
 	}
 
-	@Override
-	protected void loadChildren(Element xmlElement) throws Exception {
-		final String nodeName = xmlElement.getNodeName();
-		if (nodeName.equalsIgnoreCase(Rail.TYPE)) {
-			final Rail instance = new Rail(xmlElement, getProject(), this);
-			getGenList().add(instance);
-		} else if (nodeName.equalsIgnoreCase(Register.TYPE)) {
-			final Register instance = new Register(xmlElement, getProject(), this);
-			getGenList().add(instance);
-		}
-	}
-
 	public IElement getParent() {
 		return this.parent;
 	}
