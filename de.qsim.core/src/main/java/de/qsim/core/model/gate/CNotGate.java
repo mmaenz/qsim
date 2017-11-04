@@ -13,19 +13,20 @@ import de.qsim.core.utils.Complex;
 public strictfp class CNotGate extends AbstractGate implements IGate {
 	
 	public CNotGate(Element element, Project project, IElement parent) throws Exception {
-		super(element, project, parent, GateType.CNotGate.toString());
+		super(element, project, parent, GateType.CNotGate);
 	}
 
 	public CNotGate(String name, Project project, IElement parent) throws Exception {
-		super(name, project, parent, GateType.CNotGate.toString());
+		super(name, project, parent, GateType.CNotGate);
 	}
 	
 	public CNotGate(String name) throws Exception {
-		super(name, null, null, GateType.CNotGate.toString());
+		super(name, null, null, GateType.CNotGate);
 	}
 
 	@Override
-	public List<QuBit> applyGate(List<QuBit> inputQubit) {
+	public List<QuBit> applyGate(List<QuBit> inputQubit) throws Exception {
+		super.applyGate(inputQubit);
 		int mask = 0;
 		int newPosition = 0;
 		Complex[] states = inputQubit.get(0).getComplex();
@@ -45,14 +46,14 @@ public strictfp class CNotGate extends AbstractGate implements IGate {
 
 	@Override
 	public String getDescription() {
-		return GateType.CNotGate.getDescription();
-	}
-	
-	@Override
-	public String toString() {
-		return getType();
+		return getType().getDescription();
 	}
 
+	@Override
+	public GateType getGateType() {
+		return getType();
+	}
+	
 	@Override
 	public List<QuBit> step() throws Exception {
 		// TODO Auto-generated method stub

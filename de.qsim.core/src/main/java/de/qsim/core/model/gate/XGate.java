@@ -14,19 +14,20 @@ import de.qsim.core.utils.Complex;
 public strictfp class XGate extends AbstractGate implements IGate {
 
 	public XGate(Element element, Project project, IElement parent) throws Exception {
-		super(element, project, parent, GateType.XGate.toString());
+		super(element, project, parent, GateType.XGate);
 	}
 
 	public XGate(String name, Project project, IElement parent) throws Exception {
-		super(name, project, parent, GateType.XGate.toString());
+		super(name, project, parent, GateType.XGate);
 	}
 
 	public XGate(String name) throws Exception {
-		super(name, null, null, GateType.XGate.toString());
+		super(name, null, null, GateType.XGate);
 	}
 
 	@Override
-	public List<QuBit> applyGate(List<QuBit> inputQubit) {
+	public List<QuBit> applyGate(List<QuBit> inputQubit) throws Exception {
+		super.applyGate(inputQubit);
 		int mask = 0;
 		int newPosition = 0;
 		Complex[] states = inputQubit.get(0).getComplex();
@@ -56,11 +57,11 @@ public strictfp class XGate extends AbstractGate implements IGate {
 
 	@Override
 	public String getDescription() {
-		return GateType.XGate.getDescription();
+		return getType().getDescription();
 	}
 
 	@Override
-	public String toString() {
+	public GateType getGateType() {
 		return getType();
 	}
 

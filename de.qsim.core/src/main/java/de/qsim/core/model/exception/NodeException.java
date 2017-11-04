@@ -1,6 +1,11 @@
 package de.qsim.core.model.exception;
 
 public class NodeException extends Exception {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4058497386840281202L;
+
 	public NodeException() {
 	}
 

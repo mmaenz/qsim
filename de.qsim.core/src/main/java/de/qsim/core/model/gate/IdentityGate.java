@@ -11,32 +11,33 @@ import de.qsim.core.model.qubit.QuBit;
 public strictfp class IdentityGate extends AbstractGate implements IGate {
 
 	public IdentityGate(Element element, Project project, IElement parent) throws Exception {
-		super(element, project, parent, GateType.IdentityGate.toString());
+		super(element, project, parent, GateType.IdentityGate);
 	}
 
 	public IdentityGate(String name) throws Exception {
-		super(name, null, null, GateType.IdentityGate.toString());
+		super(name, null, null, GateType.IdentityGate);
 	}
 
 	public IdentityGate(String name, Project project, IElement parent) throws Exception {
-		super(name, project, parent, GateType.IdentityGate.toString());
-	}
-	
-	@Override
-	public String getDescription() {
-		return GateType.IdentityGate.getDescription();
+		super(name, project, parent, GateType.IdentityGate);
 	}
 
 	@Override
-	public List<QuBit> applyGate(List<QuBit> inputQubit) {
+	public List<QuBit> applyGate(List<QuBit> inputQubit) throws Exception {
+		super.applyGate(inputQubit);
 		return inputQubit;
 	}
-	
+
 	@Override
-	public String toString() {
-		return getType();
+	public String getDescription() {
+		return getType().getDescription();
 	}
 
+	@Override
+	public GateType getGateType() {
+		return getType();
+	}
+	
 	@Override
 	public List<QuBit> step() throws Exception {
 		// TODO Auto-generated method stub

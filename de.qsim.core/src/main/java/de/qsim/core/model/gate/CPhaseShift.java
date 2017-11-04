@@ -13,19 +13,20 @@ import de.qsim.core.utils.Complex;
 public strictfp class CPhaseShift extends AbstractGate implements IGate {
 
 	public CPhaseShift(Element element, Project project, IElement parent) throws Exception {
-		super(element, project, parent, GateType.CPhaseShift.toString());
+		super(element, project, parent, GateType.CPhaseShift);
 	}
 
 	public CPhaseShift(String name, Project project, IElement parent) throws Exception {
-		super(name, project, parent, GateType.CPhaseShift.toString());
+		super(name, project, parent, GateType.CPhaseShift);
 	}
 
 	public CPhaseShift(String name) throws Exception {
-		super(name, null, null, GateType.CPhaseShift.toString());
+		super(name, null, null, GateType.CPhaseShift);
 	}
 
 	@Override
-	public List<QuBit> applyGate(List<QuBit> inputQubit) {
+	public List<QuBit> applyGate(List<QuBit> inputQubit) throws Exception {
+		super.applyGate(inputQubit);
 		int mask = 0;
 		int new_position = 0;
 
@@ -50,11 +51,11 @@ public strictfp class CPhaseShift extends AbstractGate implements IGate {
 
 	@Override
 	public String getDescription() {
-		return GateType.CPhaseShift.getDescription();
+		return getType().getDescription();
 	}
-	
+
 	@Override
-	public String toString() {
+	public GateType getGateType() {
 		return getType();
 	}
 

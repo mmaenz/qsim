@@ -1,7 +1,6 @@
 package de.qsim.core.model.gate;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,6 +10,8 @@ import org.w3c.dom.Element;
 import de.qsim.core.model.AbstractElement;
 import de.qsim.core.model.IElement;
 import de.qsim.core.model.Project;
+import de.qsim.core.model.exception.NotEnoughArgsException;
+import de.qsim.core.model.qubit.QuBit;
 
 public abstract strictfp class AbstractGate extends AbstractElement implements IElement {
 	public static String typeTargetPosition = "targetPosition";
@@ -22,20 +23,28 @@ public abstract strictfp class AbstractGate extends AbstractElement implements I
 	private int noOfEntangledQubits = 0;
 	private IElement parent;
 	private Project project;
-	private String type;
+	private GateType type;
 
-	public AbstractGate(Element element, Project project, IElement parent, String type) throws Exception {
+	public AbstractGate(Element element, Project project, IElement parent, GateType type) throws Exception {
 		super(element, project, parent);
 		this.type = type;
 		loadNode();
 		loadChildren();
 	}
 
-	public AbstractGate(String name, Project project, IElement parent, String type) throws Exception {
+	public AbstractGate(String name, Project project, IElement parent, GateType type) throws Exception {
 		super(name, project, parent);
 		this.type = type;
 	}
 
+	protected List<QuBit> applyGate(List<QuBit> inputQubit) throws Exception {
+		if (inputQubit.size() < type.getRequiredInputsNr()) {
+			throw new NotEnoughArgsException(
+					String.format("Not enough input-QuBits. %s expected, %s found.", inputQubit.size(), type.getRequiredInputsNr()));
+		}
+		return null;
+	}
+	
 	private List<Integer> getValueList(String values) {
 		List<Integer> vl = new ArrayList<>();
 		Pattern p = Pattern.compile("-?\\d+");
@@ -60,8 +69,8 @@ public abstract strictfp class AbstractGate extends AbstractElement implements I
 	@Override
 	public Element saveElement(Element xmlParent) {
 		Element node = xmlParent.getOwnerDocument().createElement(IGate.TYPE);
-		node.setAttribute("name", this.getName());
-		node.setAttribute("type", this.type);
+		node.setAttribute("name", getName());
+		node.setAttribute("type", getType().toString());
 		Element target = xmlParent.getOwnerDocument().createElement(typeTargetPosition);
 		target.setTextContent(targetPosition.toString());
 		Element cond = xmlParent.getOwnerDocument().createElement(typeConditions);
@@ -107,8 +116,16 @@ public abstract strictfp class AbstractGate extends AbstractElement implements I
 		this.project = project;
 	}
 
-	public String getType() {
+	protected GateType getType() {
 		return type;
+	}
+
+	public IElement getParent() {
+		return parent;
+	}
+
+	public void setParent(IElement parent) {
+		this.parent = parent;
 	}
 
 }

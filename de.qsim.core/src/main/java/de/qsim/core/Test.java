@@ -42,9 +42,8 @@ public class Test {
 		gate.setConditions(test);
 		gate.setTargetPosition(test);
 		gate.setNoOfEntangledQubits(5);
-
 		rail.addGate(gate);
-
+		
 		sim.saveProjectToFile("/Users/mmaenz/quantum.xml", "This is just a test source!");
 		System.out.println("Saved: Done!");
 	}

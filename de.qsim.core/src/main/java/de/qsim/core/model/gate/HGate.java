@@ -14,19 +14,20 @@ import de.qsim.core.utils.Complex;
 public strictfp class HGate extends AbstractGate implements IGate {
 
 	public HGate(Element element, Project project, IElement parent) throws Exception {
-		super(element, project, parent, GateType.HGate.toString());
+		super(element, project, parent, GateType.HGate);
 	}
 
 	public HGate(String name, Project project, IElement parent) throws Exception {
-		super(name, project, parent, GateType.HGate.toString());
+		super(name, project, parent, GateType.HGate);
 	}
 
 	public HGate(String name) throws Exception {
-		super(name, null, null, GateType.HGate.toString());
+		super(name, null, null, GateType.HGate);
 	}
 	
 	@Override
-	public List<QuBit> applyGate(List<QuBit> inputQubit) {
+	public List<QuBit> applyGate(List<QuBit> inputQubit) throws Exception {
+		super.applyGate(inputQubit);
 		int mask = 0;
 		int newPosition = 0;
 		double hCoefficient = 1.0 / Math.sqrt(2.0);
@@ -61,11 +62,11 @@ public strictfp class HGate extends AbstractGate implements IGate {
 
 	@Override
 	public String getDescription() {
-		return GateType.HGate.getDescription();
+		return getType().getDescription();
 	}
 
 	@Override
-	public String toString() {
+	public GateType getGateType() {
 		return getType();
 	}
 
