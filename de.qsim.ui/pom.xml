@@ -19,7 +19,7 @@
                         </target>
                     </configuration>
                     <goals>
-                        <goal>run</goal>
+                        <goal>copy</goal>
                     </goals>
                 </execution>
             </executions>
