@@ -1,4 +1,4 @@
 package de.qsim.core;
 
-public class Test {
+public class What {
 }
