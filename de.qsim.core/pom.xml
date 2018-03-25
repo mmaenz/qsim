@@ -19,6 +19,31 @@
 </dependency>
 
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>package</phase>
+						<configuration>
+							<target>
+								<echo>ANT TASK - copying files....</echo>
+								<copy file="target/${project.artifactId}-${project.version}.jar" tofile="../artifacts_folder/${project.artifactId}-${project.version}.jar" overwrite="true">
+								</copy>
+							</target>
+						</configuration>
+						<goals>
+							<goal>package</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+</build>
+	
 	<parent>
 		<groupId>de.qsim</groupId>
 		<artifactId>de.qsim</artifactId>
