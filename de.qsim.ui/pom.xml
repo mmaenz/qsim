@@ -13,8 +13,9 @@
                     <phase>install</phase>
                     <configuration>
                         <target>
-                           <mkdir dir="${project.build.directory}/artifacts"/> 
-			   <copy file="target/${artifactId}-${version}.jar" tofile="${project.build.directory}/artifacts/${artifactId}-${version}.jar"/>
+				<echo>Jetzt wird kopiert!!</echo>
+			   <mkdir dir="${project.build.directory}/artifacts"/> 
+			   <copy file="target/${project.artifactId}-${projectversion}.jar" tofile="${project.build.directory}/artifacts/${project.artifactId}-${project.version}.jar"/>
                         </target>
                     </configuration>
                     <goals>
