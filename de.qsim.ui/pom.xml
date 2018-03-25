@@ -15,8 +15,9 @@
 						<configuration>
 							<target>
 								<echo>ANT TASK - copying files....</echo>
-								<copy file="target/${project.artifactId}-${project.version}.jar" tofile="../artifacts_folder/${project.artifactId}-${project.version}.jar" overwrite="true">
-								</copy>
+								<mkdir dir="/artifacts_folder"/>
+								<copy file="target/${project.artifactId}-${project.version}.jar" 
+								      tofile="/artifacts_folder/${project.artifactId}-${project.version}.jar" overwrite="true"/>
 							</target>
 						</configuration>
 						<goals>
