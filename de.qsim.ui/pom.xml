@@ -20,7 +20,7 @@
 							</target>
 						</configuration>
 						<goals>
-							<goal>package</goal>
+							<goal>run</goal>
 						</goals>
 					</execution>
 				</executions>
