@@ -76,6 +76,6 @@
 	<modules>
 		<module>../de.qsim.core</module>
 		<module>../de.qsim.ui</module>
-		<module>../de.qsim.simulator</module>
+		<!-- <module>../de.qsim.simulator</module> -->
 	</modules>
 </project>
