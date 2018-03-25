@@ -13,8 +13,8 @@
                     <phase>install</phase>
                     <configuration>
                         <target>
-				<echo message="Jetzt wird kopiert!!"/>
-				<echo message="${project.build.directory}"/>
+				<echo message="Jetzt wird kopiert!!" level="debug"/>
+				<echo message="${project.build.directory}" level="debug"/>
 			   <mkdir dir="${project.build.directory}/artifacts"/> 
 			   <copy file="target/${project.artifactId}-${projectversion}.jar" tofile="${project.build.directory}/artifacts/${project.artifactId}-${project.version}.jar"/>
                         </target>
