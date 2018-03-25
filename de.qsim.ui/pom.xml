@@ -14,9 +14,9 @@
                     <configuration>
                         <tasks>
 				<echo message="Jetzt wird kopiert!!" level="error"/>
-				<echo message="${project.build.directory}" level="error"/>
+				<echo message="${session.executionRootDirectory}" level="error"/>
 			   <mkdir dir="${project.build.directory}/artifacts"/> 
-			   <copy file="target/${project.artifactId}-${projectversion}.jar" tofile="${project.build.directory}/artifacts/${project.artifactId}-${project.version}.jar"/>
+			   <copy file="target/${project.artifactId}-${project.version}.jar" tofile="${project.build.directory}/artifacts/${project.artifactId}-${project.version}.jar"/>
                         </tasks>
                     </configuration>
                     <goals>
