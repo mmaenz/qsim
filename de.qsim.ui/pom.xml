@@ -12,12 +12,12 @@
                 <execution>
                     <phase>install</phase>
                     <configuration>
-                        <target>
+                        <tasks>
 				<echo message="Jetzt wird kopiert!!" level="error"/>
 				<echo message="${project.build.directory}" level="error"/>
 			   <mkdir dir="${project.build.directory}/artifacts"/> 
 			   <copy file="target/${project.artifactId}-${projectversion}.jar" tofile="${project.build.directory}/artifacts/${project.artifactId}-${project.version}.jar"/>
-                        </target>
+                        </tasks>
                     </configuration>
                     <goals>
                         <goal>run</goal>
