@@ -29,6 +29,7 @@
                     <configuration>
                         <tasks>
 				<echo message="Jetzt wird kopiert!!" level="error"/>
+				<echo message="${project.basedir}" level="error"/>
 				<echo message="${session.executionRootDirectory}" level="error"/>
 			   <mkdir dir="${project.build.directory}/artifacts"/> 
 			   <copy file="target/${project.artifactId}-${project.version}.jar" tofile="${session.executionRootDirectory}/../artifacts/${project.artifactId}-${project.version}.jar"/>                        </tasks>
