@@ -32,13 +32,6 @@
 			<version>${junit.platform.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- Add for MavenTest -->
-		<!-- <dependency>
-			<groupId>org.junit.vintage</groupId>
-			<artifactId>junit-vintage-engine</artifactId>
-			<version>4.12.0</version>
-			<scope>test</scope>
-		</dependency> -->
 		<dependency>
 			<groupId>com.googlecode.junit-toolbox</groupId>
 			<artifactId>junit-toolbox</artifactId>
@@ -46,9 +39,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<scm>
-    <connection>scm:git:https://github.com/mmaenz/qsim</connection>
-  </scm>
 	<build>
 		<plugins>
 			<plugin>
